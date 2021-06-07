@@ -5,7 +5,7 @@ import os
 
 main_application = tk.Tk()
 main_application.geometry('1200x800')
-main_application.title('Text Editor')
+main_application.title('Vpad text editor')
 main_application.wm_iconbitmap('icon.ico')
 
 
@@ -138,7 +138,19 @@ text_editor.focus_set()
 scroll_bar.pack(side=tk.RIGHT, fill=tk.Y)
 text_editor.pack(fill=tk.BOTH, expand=True)
 scroll_bar.config(command=text_editor.yview)
-text_editor.config(yscrollcommand=scroll_bar.set)
+text_editor.config(yscrollcommand=scroll_bar.set, undo=True)
+
+
+## Undo Button 
+undo_icon = tk.PhotoImage(file='icons2/undo.png')
+undo_btn = ttk.Button(tool_bar, image=undo_icon, command=text_editor.edit_undo)
+undo_btn.grid(row=0, column=9, padx=5)
+
+## Redo Button 
+redo_icon = tk.PhotoImage(file='icons2/redo.png')
+redo_btn = ttk.Button(tool_bar, image=redo_icon, command=text_editor.edit_redo)
+redo_btn.grid(row=0, column=10, padx=5)
+
 
 # font family and font size functionality 
 current_font_family = 'Arial'
@@ -227,8 +239,6 @@ def align_right():
     text_editor.insert(tk.INSERT, text_content, 'right')
 
 align_right_btn.configure(command=align_right)
-
-
 
 
 
